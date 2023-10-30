@@ -3,11 +3,12 @@ public class Time {
     private int minutes;
     private int seconds;
 
-    public Time(){
+    public Time() {
         this.hours = 24;
         this.minutes = 0;
         this.seconds = 0;
     }
+
     public Time(int hours, int minutes, int seconds) {
         this.hours = hours;
         this.minutes = minutes;
@@ -16,51 +17,49 @@ public class Time {
     }
 
     public void fromString(String time) {
-
-        this.hours = Integer.parseInt(time.substring(0, time.indexOf(":")));
-        this.minutes = Integer.parseInt(time.substring(3,5));
-        this.seconds = Integer.parseInt(time.substring(6));
+        this.hours = Integer.parseInt(time.split(":")[0]);
+        this.minutes = Integer.parseInt(time.split(":")[1]);
+        this.seconds = Integer.parseInt(time.split(":")[2]);
     }
 
-    public void increment(int amountInSeconds){
+    public void increment(int amountInSeconds) {
         int hours = this.hours + amountInSeconds / 3600;
         int minutes = this.minutes + (amountInSeconds % 3600) / 60;
         int seconds = this.seconds + (amountInSeconds % 3600) % 60;
         this.hours = hours;
-        if (minutes<60) {
+        if (minutes < 60) {
             this.minutes = minutes;
-        }else{
+        } else {
             this.minutes = minutes % 60;
-            this.hours = hours + (minutes/60);
+            this.hours = hours + (minutes / 60);
         }
-        if (seconds<60) {
+        if (seconds < 60) {
             this.seconds = seconds;
-        }else{
+        } else {
             this.seconds = seconds % 60;
-            this.minutes = minutes + (seconds/60);
+            this.minutes = minutes + (seconds / 60);
         }
     }
 
-    public void print(boolean militaryTime){
+    public void print(boolean militaryTime) {
         this.hours = this.hours % 24;
         if (!militaryTime) {
             if (this.hours > 12) {
                 System.out.print((timeConstructor(this.hours % 12)) + ":");
                 System.out.print(timeConstructor(this.minutes) + ":");
                 System.out.print(timeConstructor(this.seconds) + " PM\n");
-            }else{
+            } else {
                 System.out.print((timeConstructor(this.hours)) + ":");
                 System.out.print(timeConstructor(this.minutes) + ":");
                 System.out.print(timeConstructor(this.seconds) + " AM\n");
 
             }
-        }
-        else {
+        } else {
             if (this.hours > 12) {
-            System.out.print((timeConstructor(this.hours)) + ":");
-            System.out.print(timeConstructor(this.minutes) + ":");
-            System.out.print(timeConstructor(this.seconds) + " \n");
-            }else {
+                System.out.print((timeConstructor(this.hours)) + ":");
+                System.out.print(timeConstructor(this.minutes) + ":");
+                System.out.print(timeConstructor(this.seconds) + " \n");
+            } else {
                 System.out.print(timeConstructor(this.hours) + ":");
                 System.out.print(timeConstructor(this.minutes) + ":");
                 System.out.print(timeConstructor(this.seconds) + " \n");
@@ -68,11 +67,11 @@ public class Time {
         }
     }
 
-    private String timeConstructor(int numbers){
-        if (numbers>10) {
+    private String timeConstructor(int numbers) {
+        if (numbers > 10) {
             return Integer.toString(numbers);
-        }else {
-            return ("0"+numbers);
+        } else {
+            return ("0" + numbers);
         }
     }
 }
