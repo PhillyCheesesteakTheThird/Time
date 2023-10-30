@@ -1,8 +1,10 @@
+// the "main" class for the program
 public class Main {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Time t1 = new Time();              // midnight
         Time t2 = new Time(17, 30, 0);     // 5:30 PM
-        Time t3 = Time.fromString("14:15:56");
+        Time t3 = new Time();
+        t3.fromString("14:15:56");
 
         // add an hour onto t1, then print it in both formats
         t1.increment(3600);
